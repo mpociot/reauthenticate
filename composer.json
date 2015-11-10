@@ -1,0 +1,32 @@
+{
+    "name": "mpociot/reauthenticate",
+    "license": "MIT",
+    "description": "Reauthenticate users by letting them re-enter their passwords for specific parts of your app.",
+    "keywords": ["reauthentication","security","authentication","password prompt"],
+    "homepage": "http://github.com/mpociot/reauthenticate",
+    "authors": [
+        {
+            "name": "Marcel Pociot",
+            "email": "m.pociot@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/mpociot/reauthenticate/issues",
+        "source": "https://github.com/mpociot/reauthenticate"
+    },
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "~5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "classmap": [
+            "tests/ReauthenticateTestCase.php"
+        ],
+        "psr-0": {
+            "Mpociot\\Reauthenticate": "src/"
+        }
+    }
+}
