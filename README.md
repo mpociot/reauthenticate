@@ -49,7 +49,7 @@ In your `app\Http\Kernel.php` file, add the reauthenticate middleware to the `$r
 ```php
 protected $routeMiddleware = [
     // ...
-    'reauthenticate'         => Mpociot\Reauthenticate\Middleware\Reauthenticate::class,
+    'reauthenticate'         => \Mpociot\Reauthenticate\Middleware\Reauthenticate::class,
     // ...
 ];
 ```
