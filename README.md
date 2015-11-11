@@ -9,6 +9,7 @@
 Reauthenticate users by letting them re-enter their passwords for specific parts of your app (for Laravel 5).
 
 
+
 ```php
 Route::group(['middleware' => ['auth','reauthenticate']], function () {
 
