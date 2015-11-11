@@ -1,15 +1,13 @@
 <?php
 
 use Carbon\Carbon;
-use Mockery as m;
 
 class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
 {
-
     public function test_get_reauthenticate_shows_view()
     {
         $controller = new TestController();
-        $this->setExpectedException('InvalidArgumentException','View [auth.reauthenticate] not found.');
+        $this->setExpectedException('InvalidArgumentException', 'View [auth.reauthenticate] not found.');
         $controller->getReauthenticate();
     }
 
@@ -17,12 +15,12 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
     {
         $user = new TestUser();
 
-        Auth::shouldReceive("user")
+        Auth::shouldReceive('user')
             ->once()
             ->andReturn($user);
 
-        $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate','POST',[
-            'password' => 'test'
+        $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate', 'POST', [
+            'password' => 'test',
         ]);
         $request->setSession(app('session.store'));
 
@@ -37,15 +35,15 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
     public function test_post_reauthenticate_returns_redirect()
     {
         $user = new TestUser();
-        $user->password = bcrypt("test");
+        $user->password = bcrypt('test');
 
-        Auth::shouldReceive("user")
+        Auth::shouldReceive('user')
             ->once()
             ->andReturn($user);
 
-        Session::set("url.intended",'http://reauthenticate.app/auth/reauthenticate');
-        $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate','POST',[
-            'password' => 'test'
+        Session::set('url.intended', 'http://reauthenticate.app/auth/reauthenticate');
+        $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate', 'POST', [
+            'password' => 'test',
         ]);
         $request->setSession(app('session.store'));
 
@@ -57,16 +55,16 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
         $this->assertEquals('http://reauthenticate.app/auth/reauthenticate', $response->getTargetUrl());
 
         $this->assertTrue(Session::has('reauthenticate.life'));
-        $this->assertEquals(Carbon::now()->timestamp,Session::get('reauthenticate.life'));
+        $this->assertEquals(Carbon::now()->timestamp, Session::get('reauthenticate.life'));
         $this->assertTrue(Session::has('reauthenticate.authenticated'));
         $this->assertTrue(Session::get('reauthenticate.authenticated'));
-
     }
 
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param \Illuminate\Foundation\Application $app
+     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -75,7 +73,6 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
         $app['config']->set('session.driver', 'array');
         $app['config']->set('auth.model', 'TestUser');
     }
-    
 }
 
 class TestController extends \Illuminate\Routing\Controller
