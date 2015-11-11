@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth','reauthenticate']], function () {
 
 In order to add reauthenticate to your project, just add 
 
-    "mpociot/reauthenticate": "0.9"
+    "mpociot/reauthenticate": "~1.0"
 
 to your composer.json. Then run `composer install` or `composer update`.
 
