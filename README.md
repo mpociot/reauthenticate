@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.org/mpociot/reauthenticate.svg)](https://travis-ci.org/mpociot/reauthenticate)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mpociot/reauthenticate/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mpociot/reauthenticate/?branch=master)
 [![codecov.io](https://codecov.io/github/mpociot/reauthenticate/coverage.svg?branch=master)](https://codecov.io/github/mpociot/reauthenticate?branch=master)
+[![StyleCI](https://styleci.io/repos/45939836/shield)](https://styleci.io/repos/45939836)
 
 Reauthenticate users by letting them re-enter their passwords for specific parts of your app (for Laravel 5).
 
