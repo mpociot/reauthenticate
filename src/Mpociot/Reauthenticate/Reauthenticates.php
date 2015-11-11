@@ -2,15 +2,14 @@
 
 namespace Mpociot\Reauthenticate;
 
+use Auth;
 use Carbon\Carbon;
+use Hash;
 use Illuminate\Http\Request;
 use Lang;
-use Hash;
-use Auth;
 
 trait Reauthenticates
 {
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -22,7 +21,8 @@ trait Reauthenticates
     /**
      * Handle the reauthentication request to the application.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function postReauthenticate(Request $request)
@@ -30,8 +30,7 @@ trait Reauthenticates
         $this->validate($request, [
             'password' => 'required',
         ]);
-        if(!Hash::check($request->password, Auth::user()->getAuthPassword()))
-        {
+        if (!Hash::check($request->password, Auth::user()->getAuthPassword())) {
             return redirect()
                 ->back()
                 ->withErrors([
@@ -41,9 +40,9 @@ trait Reauthenticates
 
         $request->session()->set('reauthenticate.life', Carbon::now()->timestamp);
         $request->session()->set('reauthenticate.authenticated', true);
+
         return redirect()->intended();
     }
-
 
     /**
      * Get the failed login message.
@@ -56,5 +55,4 @@ trait Reauthenticates
             ? Lang::get('auth.failed')
             : 'These credentials do not match our records.';
     }
-
 }
