@@ -55,7 +55,6 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
         $this->assertEquals('http://reauthenticate.app/auth/reauthenticate', $response->getTargetUrl());
 
         $this->assertTrue(Session::has('reauthenticate.life'));
-        $this->assertEquals(Carbon::now()->timestamp, Session::get('reauthenticate.life'));
         $this->assertTrue(Session::has('reauthenticate.authenticated'));
         $this->assertTrue(Session::get('reauthenticate.authenticated'));
     }
