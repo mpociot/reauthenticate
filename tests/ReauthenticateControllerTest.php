@@ -1,6 +1,5 @@
 <?php
 
-use Carbon\Carbon;
 
 class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
 {
