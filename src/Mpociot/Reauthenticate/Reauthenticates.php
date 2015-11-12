@@ -2,11 +2,13 @@
 
 namespace Mpociot\Reauthenticate;
 
-use Auth;
 use Carbon\Carbon;
-use Hash;
 use Illuminate\Http\Request;
-use Lang;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
 
 trait Reauthenticates
 {
@@ -15,7 +17,7 @@ trait Reauthenticates
      */
     public function getReauthenticate()
     {
-        return view('auth.reauthenticate');
+        return View::make('auth.reauthenticate');
     }
 
     /**
@@ -31,8 +33,7 @@ trait Reauthenticates
             'password' => 'required',
         ]);
         if (!Hash::check($request->password, Auth::user()->getAuthPassword())) {
-            return redirect()
-                ->back()
+            return Redirect::back()
                 ->withErrors([
                     'password' => $this->getFailedLoginMessage(),
                 ]);
@@ -41,7 +42,7 @@ trait Reauthenticates
         $request->session()->set('reauthenticate.life', Carbon::now()->timestamp);
         $request->session()->set('reauthenticate.authenticated', true);
 
-        return redirect()->intended();
+        return Redirect::intended();
     }
 
     /**
