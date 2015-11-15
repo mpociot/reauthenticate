@@ -24,8 +24,8 @@
         "orchestra/testbench": "~3.0"
     },
     "autoload": {
-        "psr-0": {
-            "Mpociot\\Reauthenticate": "src/"
+        "psr-4": {
+            "Mpociot\\Reauthenticate\\": "src/"
         }
     }
 }
