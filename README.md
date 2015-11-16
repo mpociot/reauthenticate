@@ -1,11 +1,11 @@
 # Reauthenticate
 ## Because sometimes, you want that extra layer of security
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 [![Build Status](https://travis-ci.org/mpociot/reauthenticate.svg)](https://travis-ci.org/mpociot/reauthenticate)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mpociot/reauthenticate/badges/quality-score.png?b=master&)](https://scrutinizer-ci.com/g/mpociot/reauthenticate/?branch=master)
 [![codecov.io](https://codecov.io/github/mpociot/reauthenticate/coverage.svg?branch=master)](https://codecov.io/github/mpociot/reauthenticate?branch=master)
-[![StyleCI](https://styleci.io/repos/45939836/shield)](https://styleci.io/repos/45939836)
+[![StyleCI](https://styleci.io/repos/45939836/shield?style=flat)](https://styleci.io/repos/45939836)
 
 Reauthenticate users by letting them re-enter their passwords for specific parts of your app (for Laravel 5).
 
@@ -26,12 +26,12 @@ Route::group(['middleware' => ['auth','reauthenticate']], function () {
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [License](#license) 
+- [License](#license)
 
 <a name="installation" />
 ## Installation
 
-In order to add reauthenticate to your project, just add 
+In order to add reauthenticate to your project, just add
 
     "mpociot/reauthenticate": "~1.0"
 
