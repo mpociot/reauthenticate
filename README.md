@@ -58,6 +58,8 @@ protected $routeMiddleware = [
 
 By default, reauthanticate is looking for a route `auth/reauthenticate` and a view `auth.reauthenticate` that will hold a password field.
 
+An example view can be copied from [here](https://github.com/mpociot/reauthenticate/blob/master/views/reauthenticate.blade.php). Please note that this file needs to be manually copied, because I didn't want to bloat this package with a service provider.
+
 The HTTP controller methods can be used from the `Reauthenticates` trait, so your AuthController looks like this:
 
 ```php
@@ -85,7 +87,23 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins, Reauthenticates;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins, Reauthenticates {
+        AuthenticatesAndRegistersUsers::getFailedLoginMessage insteadof Reauthenticates;
+    }
+```
+
+Be sure to except the reauthenticate routes from the `guest` middleware.
+
+```php
+    /**
+     * Create a new authentication controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest', ['except' => ['logout','getReauthenticate','postReauthenticate'] ]);
+    }
 ```
 
 To get started, add these routes to your `routes.php` file:
