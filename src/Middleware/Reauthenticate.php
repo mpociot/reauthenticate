@@ -25,8 +25,8 @@ class Reauthenticate
     {
         $validationTime = Carbon::createFromTimestamp($session->get('reauthenticate.life', 0));
 
-        return ($session->get('reauthenticate.authenticated', false) &&
-            ($validationTime->diffInMinutes() <= $this->reauthTime));
+        return $session->get('reauthenticate.authenticated', false) &&
+            ($validationTime->diffInMinutes() <= $this->reauthTime);
     }
 
     /**
