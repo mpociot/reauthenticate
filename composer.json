@@ -22,5 +22,7 @@
         "psr-4": {
             "Mpociot\\Reauthenticate\\": "src/"
         }
-    }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }
