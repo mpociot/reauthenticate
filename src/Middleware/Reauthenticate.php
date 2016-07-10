@@ -42,9 +42,21 @@ class Reauthenticate
         if (!$this->validAuth($request->session())) {
             $request->session()->set('url.intended', $request->url());
 
-            return redirect('auth/reauthenticate');
+            return $this->invalidated($request);
         }
 
         return $next($request);
+    }
+
+    /**
+     * Handle invalidated auth.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return mixed
+     */
+    protected function invalidated($request)
+    {
+        return redirect('auth/reauthenticate');
     }
 }
