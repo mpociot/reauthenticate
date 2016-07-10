@@ -2,10 +2,7 @@
 
 namespace Mpociot\Reauthenticate;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -32,15 +29,15 @@ trait Reauthenticates
         $this->validate($request, [
             'password' => 'required',
         ]);
-        if (!Hash::check($request->password, Auth::user()->getAuthPassword())) {
+
+        $reauth = new ReauthLimiter($request);
+
+        if (!$reauth->attempt($request->password)) {
             return Redirect::back()
                 ->withErrors([
                     'password' => $this->getFailedLoginMessage(),
                 ]);
         }
-
-        $request->session()->set('reauthenticate.life', Carbon::now()->timestamp);
-        $request->session()->set('reauthenticate.authenticated', true);
 
         return Redirect::intended();
     }
