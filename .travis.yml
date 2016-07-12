@@ -6,14 +6,47 @@ php:
   - 5.6
   - 7.0
 
+env:
+  global:
+    - laravel='*'
+    - coverage=no
+
+matrix:
+  include:
+    - php: 5.5.9
+      env: laravel='5.1'
+    - php: 5.5.9
+      env: laravel='5.2'
+    - php: 5.5
+      env: laravel='5.1'
+    - php: 5.5
+      env: laravel='5.2'
+    - php: 5.6
+      env: laravel='5.1'
+    - php: 5.6
+      env: laravel='5.2'
+    - php: 5.6
+      env: laravel='5.3'
+    - php: 7.0
+      env: laravel='5.1' coverage=yes
+    - php: 7.0
+      env: laravel='5.2' coverage=yes
+    - php: 7.0
+      env: laravel='5.3' coverage=yes
+  fast_finish: true
+
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer install --prefer-source --no-interaction
+  - if [[ $laravel = '*' ]]; then travis_retry composer install --prefer-dist --no-interaction; fi
+  - if [[ $laravel = '5.1' ]]; then travis_retry composer require "laravel/framework=5.1.*" --dev --prefer-dist --no-interaction; fi
+  - if [[ $laravel = '5.2' ]]; then travis_retry composer require "laravel/framework=5.2.*" --dev --prefer-dist --no-interaction; fi
+  - if [[ $laravel = '5.3' ]]; then travis_retry composer require "laravel/framework=5.3.*" --dev --prefer-dist --no-interaction; fi
 
 script:
-  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - if [[ $coverage = 'yes' ]]; then vendor/bin/phpunit --coverage-clover=coverage.xml; fi
+  - if [[ $coverage = 'no' ]]; then vendor/bin/phpunit; fi
 
 before_install:
   - pip install --user codecov
 after_success:
-  - codecov
+  - if [[ $coverage = 'yes' ]]; then codecov; fi
