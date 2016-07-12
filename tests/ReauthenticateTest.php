@@ -5,7 +5,8 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
     public function test_middleware_returns_redirect()
     {
         $middleware = new \Mpociot\Reauthenticate\Middleware\Reauthenticate();
-        $closure = function () {};
+        $closure = function () {
+        };
 
         /** @var Illuminate\Http\Request $request */
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
@@ -51,7 +52,8 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
         \Session::set('reauthenticate.authenticated', true);
 
         $middleware = new \Mpociot\Reauthenticate\Middleware\Reauthenticate();
-        $closure = function () {};
+        $closure = function () {
+        };
 
         /** @var Illuminate\Http\Request $request */
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
