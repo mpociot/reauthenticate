@@ -12,7 +12,7 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
             'password' => 'test',
         ]);
-        $request->setLaravelSession(app('session.store'));
+        $this->setSession($request, app('session.store'));
 
         /** @var Illuminate\Http\RedirectResponse $result */
         $result = $middleware->handle($request, $closure);
@@ -37,7 +37,7 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
             'password' => 'test',
         ]);
-        $request->setLaravelSession(app('session.store'));
+        $this->setSession($request, app('session.store'));
 
         /** @var Illuminate\Http\RedirectResponse $result */
         $result = $middleware->handle($request, $closure);
@@ -59,7 +59,7 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
             'password' => 'test',
         ]);
-        $request->setLaravelSession(app('session.store'));
+        $this->setSession($request, app('session.store'));
 
         /** @var Illuminate\Http\RedirectResponse $result */
         $result = $middleware->handle($request, $closure);
@@ -79,5 +79,22 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
     {
         // Setup default database to use sqlite :memory:
         $app['config']->set('session.driver', 'array');
+    }
+
+    /**
+     * Set the session for tests in a backwards compatible way
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param Illuminate\Session\Store $session
+     *
+     * @return void
+     */
+    protected function setSession($request, $session)
+    {
+        if (method_exists($request, 'setLaravelSession')) {
+            return $request->setLaravelSession($session);
+        }
+
+        return $request->setSession($session);
     }
 }
