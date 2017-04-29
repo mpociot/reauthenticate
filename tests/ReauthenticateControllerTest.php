@@ -40,7 +40,7 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
             ->once()
             ->andReturn($user);
 
-        Session::set('url.intended', 'http://reauthenticate.app/auth/reauthenticate');
+        Session::put('url.intended', 'http://reauthenticate.app/auth/reauthenticate');
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate', 'POST', [
             'password' => 'test',
         ]);

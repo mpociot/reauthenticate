@@ -20,7 +20,7 @@ class Reauthenticate
         $reauth = new ReauthLimiter($request);
 
         if (!$reauth->check()) {
-            $request->session()->set('url.intended', $request->url());
+            $request->session()->put('url.intended', $request->url());
 
             return $this->invalidated($request);
         }

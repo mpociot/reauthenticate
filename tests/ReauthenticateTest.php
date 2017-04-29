@@ -23,8 +23,8 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
 
     public function test_middleware_returns_next_with_valid_data()
     {
-        \Session::set('reauthenticate.life', \Carbon\Carbon::now()->timestamp);
-        \Session::set('reauthenticate.authenticated', true);
+        \Session::put('reauthenticate.life', \Carbon\Carbon::now()->timestamp);
+        \Session::put('reauthenticate.authenticated', true);
 
         $middleware = new \Mpociot\Reauthenticate\Middleware\Reauthenticate();
 
@@ -48,8 +48,8 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
 
     public function test_middleware_returns_redirect_with_invalid_data()
     {
-        \Session::set('reauthenticate.life', \Carbon\Carbon::minValue()->timestamp);
-        \Session::set('reauthenticate.authenticated', true);
+        \Session::put('reauthenticate.life', \Carbon\Carbon::minValue()->timestamp);
+        \Session::put('reauthenticate.authenticated', true);
 
         $middleware = new \Mpociot\Reauthenticate\Middleware\Reauthenticate();
         $closure = function () {
