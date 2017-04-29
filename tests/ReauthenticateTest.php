@@ -12,7 +12,7 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
             'password' => 'test',
         ]);
-        $request->setSession(app('session.store'));
+        $request->setLaravelSession(app('session.store'));
 
         /** @var Illuminate\Http\RedirectResponse $result */
         $result = $middleware->handle($request, $closure);
@@ -37,7 +37,7 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
             'password' => 'test',
         ]);
-        $request->setSession(app('session.store'));
+        $request->setLaravelSession(app('session.store'));
 
         /** @var Illuminate\Http\RedirectResponse $result */
         $result = $middleware->handle($request, $closure);
@@ -59,7 +59,7 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
             'password' => 'test',
         ]);
-        $request->setSession(app('session.store'));
+        $request->setLaravelSession(app('session.store'));
 
         /** @var Illuminate\Http\RedirectResponse $result */
         $result = $middleware->handle($request, $closure);

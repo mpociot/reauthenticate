@@ -21,7 +21,7 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate', 'POST', [
             'password' => 'test',
         ]);
-        $request->setSession(app('session.store'));
+        $request->setLaravelSession(app('session.store'));
 
         $controller = new TestController();
 
@@ -44,7 +44,7 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate', 'POST', [
             'password' => 'test',
         ]);
-        $request->setSession(app('session.store'));
+        $request->setLaravelSession(app('session.store'));
 
         $controller = new TestController();
 
