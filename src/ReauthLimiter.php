@@ -55,8 +55,8 @@ class ReauthLimiter
             return false;
         }
 
-        $this->request->session()->set($this->key.'.life', Carbon::now()->timestamp);
-        $this->request->session()->set($this->key.'.authenticated', true);
+        $this->request->session()->put($this->key.'.life', Carbon::now()->timestamp);
+        $this->request->session()->put($this->key.'.authenticated', true);
 
         return true;
     }

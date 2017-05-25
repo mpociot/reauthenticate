@@ -21,7 +21,7 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate', 'POST', [
             'password' => 'test',
         ]);
-        $request->setSession(app('session.store'));
+        $this->setSession($request, app('session.store'));
 
         $controller = new TestController();
 
@@ -40,11 +40,11 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
             ->once()
             ->andReturn($user);
 
-        Session::set('url.intended', 'http://reauthenticate.app/auth/reauthenticate');
+        Session::put('url.intended', 'http://reauthenticate.app/auth/reauthenticate');
         $request = \Illuminate\Http\Request::create('http://reauthenticate.app/auth/reauthenticate', 'POST', [
             'password' => 'test',
         ]);
-        $request->setSession(app('session.store'));
+        $this->setSession($request, app('session.store'));
 
         $controller = new TestController();
 
@@ -70,6 +70,23 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
         // Setup default database to use sqlite :memory:
         $app['config']->set('session.driver', 'array');
         $app['config']->set('auth.model', 'TestUser');
+    }
+
+    /**
+     * Set the session for tests in a backwards compatible way
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param Illuminate\Session\Store $session
+     *
+     * @return void
+     */
+    protected function setSession($request, $session)
+    {
+        if (method_exists($request, 'setLaravelSession')) {
+            return $request->setLaravelSession($session);
+        }
+
+        return $request->setSession($session);
     }
 }
 
