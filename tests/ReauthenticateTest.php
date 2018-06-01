@@ -68,6 +68,25 @@ class ReauthenticateTest extends Orchestra\Testbench\TestCase
         $this->assertEquals(\Session::get('url.intended'), 'http://reauthenticate.app/restricted');
     }
 
+    public function test_middleware_returns_customized_redirect_url()
+    {
+        $middleware = new \Mpociot\Reauthenticate\Middleware\Reauthenticate();
+        $closure = function () {
+        };
+
+        /** @var Illuminate\Http\Request $request */
+        $request = \Illuminate\Http\Request::create('http://reauthenticate.app/restricted', 'GET', [
+            'password' => 'test',
+        ]);
+        $this->setSession($request, app('session.store'));
+
+        config()->set('app.reauthenticate_url', '/custom-url');
+
+        /** @var Illuminate\Http\RedirectResponse $result */
+        $result = $middleware->handle($request, $closure);
+        $this->assertEquals('http://localhost/custom-url', $result->getTargetUrl());
+    }
+
     /**
      * Define environment setup.
      *
