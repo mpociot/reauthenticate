@@ -28,7 +28,6 @@ Route::group(['middleware' => ['auth','reauthenticate']], function () {
 - [Usage](#usage)
 - [License](#license)
 
-<a name="installation" />
 ## Installation
 
 In order to add reauthenticate to your project, just add
@@ -39,7 +38,6 @@ to your composer.json. Then run `composer install` or `composer update`.
 
 Or run `composer require mpociot/reauthenticate ` if you prefer that.
 
-<a name="usage" />
 ## Usage
 
 ### Add the middleware to your Kernel
@@ -119,7 +117,6 @@ Once the user successfully reauthenticates, the valid login will be stored for 3
 
 This value can be configured by extending the Reauthenticate middleware.
 
-<a name="license" />
 ## License
 
 Reauthenticate is free software distributed under the terms of the MIT license.
