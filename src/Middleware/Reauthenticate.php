@@ -22,7 +22,7 @@ class Reauthenticate
         if (!$reauth->check()) {
             $request->session()->put('url.intended', $request->url());
 
-            return $this->invalidated();
+            return $this->invalidated($request);
         }
 
         return $next($request);
@@ -31,9 +31,11 @@ class Reauthenticate
     /**
      * Handle invalidated auth.
      *
+     * @param \Illuminate\Http\Request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function invalidated()
+    protected function invalidated($request)
     {
         $url = config('app.reauthenticate_url', 'auth/reauthenticate');
 
