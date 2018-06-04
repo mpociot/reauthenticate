@@ -31,12 +31,14 @@ class Reauthenticate
     /**
      * Handle invalidated auth.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request
      *
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
     protected function invalidated($request)
     {
-        return redirect('auth/reauthenticate');
+        $url = config('app.reauthenticate_url', 'auth/reauthenticate');
+
+        return redirect($url);
     }
 }

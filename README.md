@@ -115,7 +115,16 @@ Route::post('auth/reauthenticate', 'Auth\AuthController@postReauthenticate');
 That's it.
 Once the user successfully reauthenticates, the valid login will be stored for 30 minutes.
 
-This value can be configured by extending the Reauthenticate middleware.
+The URL the user gets redirected to can be configured by adding a `reauthenticate_url` key
+to your `config/app.php` file:
+
+```php
+return [
+    // ...
+
+    'reauthenticate_url' => '/custom-url',
+];
+```
 
 ## License
 
