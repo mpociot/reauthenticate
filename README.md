@@ -109,16 +109,36 @@ Route::namespace('Auth')->group(function () {
 ```
 
 That's it.
-Once the user successfully reauthenticates, the valid login will be stored for 30 minutes.
 
-The URL the user gets redirected to can be configured by adding a `reauthenticate_url` key
-to your `config/app.php` file:
+Once the user successfully reauthenticates, the valid login will be stored for 30 minutes by default.
+
+## Optional Configuration
+
+Reauthenticate can be (optionally) configured through your `config/app.php` file. The following keys are supported:
 
 ```php
 return [
-    // ...
-
+    /*
+    |--------------------------------------------------------------------------
+    | Reauthenticate
+    |--------------------------------------------------------------------------
+    */
+    
+    /**
+     * The URL to redirect to after re-authentication is successful.
+     */
     'reauthenticate_url' => '/custom-url',
+
+    /**
+     * The key to use as your re-authentication session key.
+     */
+    'reauthenticate_key' => 'custom-reauthentication-key',
+
+    /**
+     * The time (in minutes) that the user is allowed to access the protected area 
+     * before being prompted to re re-authenticate.
+     */
+    'reauthenticate_time' => 30,
 ];
 ```
 

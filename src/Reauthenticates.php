@@ -30,7 +30,9 @@ trait Reauthenticates
             'password' => 'required',
         ]);
 
-        $reauth = new ReauthLimiter($request);
+        $reauthKey = config('app.reauthenticate_key') ?? null;
+        $reauthTime = config('app.reauthenticate_time') ?? null;
+        $reauth = new ReauthLimiter($request, $reauthKey, $reauthTime);
 
         if (!$reauth->attempt($request->password)) {
             return Redirect::back()
