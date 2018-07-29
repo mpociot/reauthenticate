@@ -39,8 +39,8 @@ class ReauthLimiter
     public function __construct(Request $request, $key = null, $reauthTime = null)
     {
         $this->request = $request;
-        $this->key = $key ?? $this->key;
-        $this->reauthTime = $reauthTime ?? $this->reauthTime;
+        $this->key = $key ?: $this->key;
+        $this->reauthTime = $reauthTime ?: $this->reauthTime;
     }
 
     /**
