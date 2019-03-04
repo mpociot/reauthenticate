@@ -6,7 +6,7 @@ class ReauthenticateControllerTest extends Orchestra\Testbench\TestCase
     public function test_get_reauthenticate_shows_view()
     {
         $controller = new TestController();
-        $this->setExpectedException('InvalidArgumentException', 'View [auth.reauthenticate] not found.');
+        $this->expectException('InvalidArgumentException', 'View [auth.reauthenticate] not found.');
         $controller->getReauthenticate();
     }
 
